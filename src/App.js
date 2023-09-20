@@ -113,3 +113,20 @@ function App() {
 }
 
 export default App
+
+let data = [
+  {
+    title: 'JS tutorials',
+    description: 'The best JavaScript tutorials in the galaxy!',
+    url: 'https://www.w3schools.com',
+    links: [
+      {
+        title: 'JS for Beginners',
+        url: 'https://www.w3schools.com/js'
+      }, {
+        title: 'JS for the Web',
+        url: 'https://www.w3schools.com/js'
+      }
+    ]
+  }
+]
