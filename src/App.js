@@ -1,66 +1,45 @@
 import './App.css'
 import Result from './Result'
 import { useState } from 'react'
-import { search } from './functions'
+import axios from 'axios'
 
 // Data
-const data = [
-  {
-    title: 'JS tutorials',
-    description: 'The best JavaScript tutorials in the galaxy!',
-    url: 'https://www.w3schools.com',
-    links: [
-      {
-        title: 'JS for Beginners',
-        url: 'https://www.w3schools.com/js',
-      },
-      {
-        title: 'JS for the Web',
-        url: 'https://www.w3schools.com/js',
-      },
-    ],
-  },
-  {
-    title: 'React tutorials',
-    description: 'The best React tutorials!',
-    url: 'https://www.w3schools.it',
-    links: [
-      {
-        title: 'React for Beginners',
-        url: 'https://www.w3schools.com/js',
-      },
-      {
-        title: 'React for the Web',
-        url: 'https://www.w3schools.com/js',
-      },
-    ],
-  },
-  {
-    title: 'Pyton tutorials',
-    description: 'The best Pyton tutorials!',
-    url: 'https://www.w3schools.com',
-    links: [
-      {
-        title: 'Pyton for Beginners',
-        url: 'https://www.w3schools.com/js',
-      },
-      {
-        title: 'Pyton for the Web',
-        url: 'https://www.w3schools.com/js',
-      },
-    ],
-  },
-]
+// const data = []
 // Component
 function App() {
   // States
   const [results, setResults] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
-  // Functions
-  function submitForm(event) {
-    event.preventDefault()
-    setResults(search(data, searchTerm))
+  // Function search
+  async function search() {
+    const { data } = await axios.get(
+      'https://project-google-search-api-demo.herokuapp.com/results',
+      {
+        params: {
+          search: searchTerm,
+        },
+      }
+    )
+    return data
   }
+  // Function submitForm
+  async function submitForm(event) {
+    event.preventDefault()
+    const newResults = await search()
+    setResults(newResults)
+  }
+  // setting API with a parameter instead of using data array
+  // const apiSearch = async () => {
+  //   let newData = await axios.get(
+  //     'https://project-google-search-api-demo.herokuapp.com',
+  //     {
+  //       param: { search: 'javascript' },
+  //     }
+  //   )
+  // }
+
+  console.log(results)
+
   // Render JSX
   return (
     <div>
