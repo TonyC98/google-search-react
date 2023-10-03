@@ -3,8 +3,6 @@ import Result from './Result'
 import { useState } from 'react'
 import axios from 'axios'
 
-// Data
-// const data = []
 // Component
 function App() {
   // States
@@ -12,14 +10,11 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
   // Function search
   async function search() {
-    const { data } = await axios.get(
-      'https://project-google-search-api-demo.herokuapp.com/results',
-      {
-        params: {
-          search: searchTerm,
-        },
-      }
-    )
+    const { data } = await axios.get('http://localhost:4000/results', {
+      params: {
+        search: searchTerm,
+      },
+    })
     return data
   }
   // Function submitForm
@@ -28,18 +23,6 @@ function App() {
     const newResults = await search()
     setResults(newResults)
   }
-  // setting API with a parameter instead of using data array
-  // const apiSearch = async () => {
-  //   let newData = await axios.get(
-  //     'https://project-google-search-api-demo.herokuapp.com',
-  //     {
-  //       param: { search: 'javascript' },
-  //     }
-  //   )
-  // }
-
-  console.log(results)
-
   // Render JSX
   return (
     <div>
