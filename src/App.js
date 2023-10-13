@@ -10,7 +10,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
   // Function search
   async function search() {
-    const { data } = await axios.get('http://localhost:4000/results', {
+    const { data } = await axios.get(process.env.REACT_APP_API_URL, {
       params: {
         search: searchTerm,
       },
